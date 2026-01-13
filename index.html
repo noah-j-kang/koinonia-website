@@ -4,49 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Koinonia Community OS</title>
-    <link rel="stylesheet" href="css/win-classic.css">
+    <title>Koinonia OS v1.0</title>
+    <link rel="stylesheet" href="css/terminal.css">
 </head>
-
 
 <body>
 
-    <!-- Desktop Icons -->
-    <div id="desktop">
-        <div class="desktop-icon" data-app="our-story">
-            <div class="icon-img icon-notepad"></div>
-            <div class="icon-label">Our Story</div>
-        </div>
-        <div class="desktop-icon" data-app="ministries">
-            <div class="icon-img icon-folder"></div>
-            <div class="icon-label">Ministries</div>
-        </div>
-        <div class="desktop-icon" data-app="gatherings">
-            <div class="icon-img icon-my-computer"></div>
-            <div class="icon-label">Gatherings</div>
-        </div>
-        <div class="desktop-icon" data-app="contact">
-            <div class="icon-img icon-phone"></div>
-            <div class="icon-label">Contact</div>
+    <div class="scanlines"></div>
+    <div class="glow-overlay"></div>
+
+    <div id="terminal-container">
+        <div id="output"></div>
+        <div class="input-line">
+            <span id="prompt-label" class="prompt">guest@koinonia:~$</span>
+            <input type="text" id="cmd-input" autocomplete="off" spellcheck="false" autofocus>
         </div>
     </div>
 
-    <!-- START MENU / TASKBAR -->
-    <div class="taskbar">
-        <div class="start-btn" id="start-btn">
-            <div class="start-icon"></div>
-            Start
-        </div>
-        <div class="taskbar-divider"></div>
-        <div id="task-list" style="display: flex;">
-            <!-- Active Tasks go here -->
-        </div>
-        <div class="time-tray">
-            <span id="clock">12:00 PM</span>
-        </div>
-    </div>
-
-    <script src="js/os-logic.js"></script>
+    <!-- Load Data first, then Logic -->
+    <script src="js/mystery-data.js"></script>
+    <script src="js/terminal-data.js"></script>
+    <script src="js/terminal-logic.js"></script>
 </body>
 
 </html>

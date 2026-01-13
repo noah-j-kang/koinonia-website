@@ -1,0 +1,141 @@
+/* Terminal CRT Styling */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+:root {
+    --terminal-green: #00FF41;
+    /* Classic Matrix Green */
+    --terminal-bg: #0c0c0c;
+    --scanline-color: rgba(18, 16, 16, 0.5);
+    --glow: 0 0 5px #00FF41;
+}
+
+body {
+    background-color: var(--terminal-bg);
+    color: var(--terminal-green);
+    font-family: 'Courier New', 'Courier Prime', monospace;
+    /* Updated font preference */
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#terminal-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* User's Custom Green Glow Logic */
+.terminal-output,
+.terminal-text,
+.command,
+.prompt,
+#cmd-input {
+    color: var(--terminal-green);
+    text-shadow: 0 0 5px var(--terminal-green);
+    white-space: pre-wrap;
+    /* Keeps formatting but allows wrap if needed, though 'pre' was requested for ASCII. output works best with pre-wrap usually, but for ASCII we might need pre. */
+    line-height: 1.2;
+}
+
+/* For ASCII Art specifically, we might need a separate class or ensure pre-wrap works. 
+   The user specified: 
+   white-space: pre; 
+   Let's see if we can apply that generally or just to the art. 
+   Applying 'pre' generally might break responsiveness of long paragraph text. 
+   I'll default to pre-wrap for general text and pre for the animation container.
+*/
+.ascii-art {
+    white-space: pre;
+    font-size: 10px;
+    /* ASCII usually needs smaller font to fit */
+    overflow-x: hidden;
+}
+
+/* CRT Scanline Effect */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.glow-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0, 50, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* Typography Overrides */
+.command {
+    font-weight: bold;
+}
+
+.error {
+    color: #ff3333;
+    text-shadow: 0 0 5px #ff3333;
+}
+
+.comment {
+    color: #00cc33;
+    font-style: italic;
+    text-shadow: 0 0 2px #00cc33;
+}
+
+a {
+    color: var(--terminal-green);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Input Line */
+.input-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    margin-right: 0.5rem;
+}
+
+#cmd-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+    }
+
+    .ascii-art {
+        font-size: 6px;
+        /* Tiny font for mobile ASCII */
+    }
+}
